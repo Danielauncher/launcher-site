@@ -1,0 +1,139 @@
+/* ===== Launcher 全站基礎樣式 ===== */
+/* 基準單位:1u = 0.8333vw(1470px 時 12.25px);手機固定 9px */
+:root { --u: 0.8333vw; }
+@media (max-width: 900px) { :root { --u: 9px; } }
+
+html { scroll-padding-top: calc(var(--u) * 7); }
+html.lenis, html.lenis body { height: auto; }
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #F5EDE3;
+  color: #363129;
+  font-family: "Inter Tight", "Noto Sans TC", sans-serif;
+  font-weight: 500;
+  font-size: max(calc(var(--u) * 1.375), 14px);
+  line-height: 1.6;
+  letter-spacing: -.02em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: #363129; }
+a:hover { color: #2559D9; }
+
+/* 全頁噪點覆蓋層(引用外部 grain.svg,z-index -1,規格固定勿改) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .55;
+  background-image: url("/grain.svg");
+}
+body.no-grain::after { display: none; }
+
+.zh { font-family: "Noto Sans TC", sans-serif; letter-spacing: 0; }
+
+/* 自動切行遮罩(JS 於執行期生成) */
+.line-mask { display: block; overflow: hidden; }
+.line-mask .line { display: block; }
+.u { display: inline-block; }
+
+/* eyebrow 藍色小方塊 */
+.eyebrow::before {
+  content: '';
+  width: calc(var(--u) * 1.15);
+  height: calc(var(--u) * 1.15);
+  background: #3A78FF;
+  border-radius: calc(var(--u) * 0.25);
+  transform: rotate(-8deg);
+  flex: 0 0 auto;
+}
+
+/* 卡片 hover 背景層縮放 */
+.hovcard:hover .bg { transform: scale(1.02); }
+
+/* 按鈕箭頭元件(雙箭頭替換,2026.07.12 定案) */
+.sq, .go { position: relative; overflow: hidden; }
+.a2 {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  transition: transform .5s cubic-bezier(.625, .05, 0, 1);
+}
+.a2d { transform: translate(-100%, 100%); }
+.av {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  transition: transform .5s cubic-bezier(.625, .05, 0, 1);
+}
+.avd { transform: translate(0, -100%); }
+.btn:hover .av { transform: translate(0, 100%); }
+.btn:hover .avd { transform: translate(0, 0); }
+.btn:hover .a2, .job:hover .a2, .svc:hover .a2, .mega-card:hover .a2 { transform: translate(100%, -100%); }
+.btn:hover .a2d, .job:hover .a2d, .svc:hover .a2d, .mega-card:hover .a2d { transform: translate(0, 0); }
+.btn:hover .sq, .job:hover .go, .svc:hover .go, .mega-card:hover .sq { background: #2559D9 !important; }
+
+/* 導覽列連結底線 */
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1.5px;
+  width: 100%;
+  background: #363129;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.navlink:hover::after { transform: scaleX(1); }
+
+/* 拖拉滑軌(桌機) */
+@media (min-width: 901px) {
+  .norail { cursor: grab; }
+  .norail.is--dragging { cursor: grabbing; scroll-snap-type: none !important; user-select: none; }
+  .norail.is--dragging a { pointer-events: none; }
+}
+.norail::-webkit-scrollbar { display: none; }
+.arrow.dim { background: #E9E0D2 !important; color: #B3A897 !important; cursor: default !important; }
+
+.flink:hover { color: #F6F0E7 !important; }
+@media (min-width: 1560px) { .ink-panel { margin: 0 auto !important; } }
+
+/* 表單欄位 */
+.fld {
+  width: 100%;
+  background: #F5EDE3;
+  border: 1px solid rgba(54, 49, 41, 0.12);
+  border-radius: calc(var(--u) * 0.5);
+  min-height: max(calc(var(--u) * 3.75), 44px);
+  padding: calc(var(--u) * 0.9) calc(var(--u) * 1.25);
+  font-family: "Inter Tight", "Noto Sans TC", sans-serif;
+  font-size: max(calc(var(--u) * 1.15), 14px);
+  color: #363129;
+  font-weight: 500;
+}
+.fld:focus { outline: 2px solid #3A78FF; outline-offset: -1px; }
+.fld::placeholder { color: #B3A897; }
+
+/* 手機漢堡選單狀態(body class 驅動,需為全域) */
+body.menu-open { overflow: hidden; }
+body.menu-open .m-menu { transform: translateY(0) !important; }
+body.menu-open .burger s:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+body.menu-open .burger s:nth-child(2) { opacity: 0 !important; }
+body.menu-open .burger s:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
+@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .burger { display: flex !important; }
+  .m-menu { display: block !important; }
+}

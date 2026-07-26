@@ -1,0 +1,10 @@
+allowBuilds:
+  esbuild: set this to true or false
+  workerd: set this to true or false
+onlyBuiltDependencies:
+  - esbuild
+  - "@parcel/watcher"
+  - better-sqlite3
+  - sharp
+  - unrs-resolver
+  - workerd
