@@ -225,7 +225,7 @@
           <div class="offices fade-up zh" style="display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*2);margin-top:calc(var(--u)*5);max-width:1078px">
             <div><h5 style="font-family:'Space Mono',monospace;font-size:max(calc(var(--u)*0.9),10px);text-transform:uppercase;color:#F6F0E7;margin:0 0 calc(var(--u)*1)">Launcher Taichung</h5><p style="font-size:max(calc(var(--u)*1.15),12px);color:#ABA192;line-height:1.7;margin:0">台中市 [地址]</p></div>
             <div><h5 style="font-family:'Space Mono',monospace;font-size:max(calc(var(--u)*0.9),10px);text-transform:uppercase;color:#F6F0E7;margin:0 0 calc(var(--u)*1)">Launcher New York</h5><p style="font-size:max(calc(var(--u)*1.15),12px);color:#ABA192;line-height:1.7;margin:0">New York, NY [地址]</p></div>
-            <div><h5 style="font-family:'Space Mono',monospace;font-size:max(calc(var(--u)*0.9),10px);text-transform:uppercase;color:#F6F0E7;margin:0 0 calc(var(--u)*1)">Contact Daniel</h5><a class="flink" href="mailto:hello@withlauncher.com" style="font-size:max(calc(var(--u)*1.15),12px);color:#ABA192;text-decoration:none;line-height:1.7">hello@withlauncher.com</a></div>
+            <div><h5 style="font-family:'Space Mono',monospace;font-size:max(calc(var(--u)*0.9),10px);text-transform:uppercase;color:#F6F0E7;margin:0 0 calc(var(--u)*1)">Contact Daniel</h5><a class="flink" href="mailto:hello@launcher.tw" style="font-size:max(calc(var(--u)*1.15),12px);color:#ABA192;text-decoration:none;line-height:1.7">hello@launcher.tw</a></div>
           </div>
         </div>
         <footer>
