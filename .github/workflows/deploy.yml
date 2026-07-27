@@ -1,0 +1,83 @@
+name: Deploy to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: 032dd26b5e85b79bd5e2ff6d98f565d0
+  DB_NAME: launcher-db
+  PROJECT_NAME: launcher-site
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm exec nuxt build
+
+      - name: Ensure D1 database exists
+        run: pnpm exec wrangler d1 create "$DB_NAME" || echo "D1 already exists"
+
+      - name: Resolve D1 database id
+        id: d1
+        run: |
+          DB_ID=$(pnpm exec wrangler d1 list --json | jq -r --arg n "$DB_NAME" '.[] | select(.name==$n) | .uuid')
+          echo "id=$DB_ID" >> "$GITHUB_OUTPUT"
+          echo "D1 id: $DB_ID"
+
+      - name: Generate wrangler config
+        run: |
+          cat > wrangler.toml <<EOF
+          name = "${PROJECT_NAME}"
+          pages_build_output_dir = "dist"
+          compatibility_date = "2026-07-01"
+          compatibility_flags = ["nodejs_compat"]
+
+          [[d1_databases]]
+          binding = "DB"
+          database_name = "${DB_NAME}"
+          database_id = "${{ steps.d1.outputs.id }}"
+          EOF
+          cat wrangler.toml
+
+      - name: Apply database migrations
+        run: |
+          pnpm exec wrangler d1 execute "$DB_NAME" --remote --command "CREATE TABLE IF NOT EXISTS _hub_migrations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL);"
+          for f in server/database/migrations/*.sql; do
+            name=$(basename "$f" .sql)
+            applied=$(pnpm exec wrangler d1 execute "$DB_NAME" --remote --json --command "SELECT COUNT(*) AS c FROM _hub_migrations WHERE name = '$name';" | jq -r '.[0].results[0].c')
+            if [ "$applied" = "0" ]; then
+              echo "Applying migration: $name"
+              pnpm exec wrangler d1 execute "$DB_NAME" --remote --file "$f"
+              pnpm exec wrangler d1 execute "$DB_NAME" --remote --command "INSERT OR IGNORE INTO _hub_migrations (name) VALUES ('$name');"
+            else
+              echo "Skipping applied migration: $name"
+            fi
+          done
+
+      - name: Ensure Pages project exists
+        run: pnpm exec wrangler pages project create "$PROJECT_NAME" --production-branch=main || echo "Pages project already exists"
+
+      - name: Deploy to Cloudflare Pages
+        run: pnpm exec wrangler pages deploy dist --project-name="$PROJECT_NAME" --branch=main --commit-dirty=true
