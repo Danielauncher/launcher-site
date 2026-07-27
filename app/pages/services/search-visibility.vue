@@ -102,7 +102,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '搜尋與能見度 — Launcher' })
+useLauncherSeo({
+  title: '搜尋與能見度 — Launcher',
+  description: '當買家開始搜尋，第一個看到你。英文 SEO 由北美在地操盤手執行，從關鍵字策略到內容產線，建立可累積的自然流量。',
+  path: '/services/search-visibility'
+})
 useLauncherMotion()
 </script>
 

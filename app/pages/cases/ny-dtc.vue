@@ -73,7 +73,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '品牌改造，轉換率提升 67% — Launcher' })
+useLauncherSeo({
+  title: '品牌改造，轉換率提升 67% — Launcher',
+  description: '品牌改造後轉換率提升 67%，12 家當地企業長期服務。紐約 DTC 品牌改造案例。',
+  path: '/cases/ny-dtc'
+})
 useLauncherMotion()
 </script>
 

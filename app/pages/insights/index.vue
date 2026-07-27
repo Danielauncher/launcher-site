@@ -52,7 +52,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '洞察 — Launcher' })
+useLauncherSeo({
+  title: '洞察 — Launcher',
+  description: '出海英語市場的實戰洞察：市場進入、英文 SEO、品牌在地化與社群經營，操盤手第一手筆記。',
+  path: '/insights'
+})
 useLauncherMotion()
 
 // 文章牆篩選(對應 DCLogic bindFilters)

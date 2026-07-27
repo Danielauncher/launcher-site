@@ -56,7 +56,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '開始 — Launcher' })
+useLauncherSeo({
+  title: '開始 — Launcher',
+  description: '填好表單，48 小時內由台灣端品牌策略師親自回覆。30 分鐘市場診斷對談，談你的市場，不推銷方案。',
+  path: '/start'
+})
 useLauncherMotion()
 
 const form = reactive({
@@ -77,9 +81,16 @@ async function submit() {
   if (sending.value) return
   sending.value = true
   error.value = false
+  const eventId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-lead`
   try {
-    await $fetch('/api/lead', { method: 'POST', body: { ...form } })
+    await $fetch('/api/lead', { method: 'POST', body: { ...form, event_id: eventId } })
     submitted.value = true
+    // 轉換事件(GA4 + Meta Pixel,與伺服器端 CAPI 以 event_id 去重)
+    try {
+      const w = window as any
+      if (w.gtag) w.gtag('event', 'generate_lead', { market: form.market, budget: form.budget })
+      if (w.fbq) w.fbq('track', 'Lead', {}, { eventID: eventId })
+    } catch {}
   } catch {
     error.value = true
   } finally {

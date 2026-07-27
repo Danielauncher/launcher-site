@@ -56,7 +56,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '加入我們 — Launcher' })
+useLauncherSeo({
+  title: '加入我們 — Launcher',
+  description: '加入 Launcher——分散式團隊，台北 × 紐約 × 澳洲。我們找的是在市場裡的操盤手。',
+  path: '/careers'
+})
 useLauncherMotion()
 </script>
 

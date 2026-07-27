@@ -243,7 +243,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Launcher — 亞洲品牌的市場進入合夥人' })
+useLauncherSeo({
+  title: 'Launcher — 亞洲品牌的市場進入合夥人',
+  description: '我們為亞洲品牌打造進入北美市場的在地行銷引擎。市場分析與定位、英文 SEO、社群與內容經營——你在北美的第一個成員。',
+  path: '/'
+})
 useLauncherMotion()
 
 // 首頁專屬互動(移植自 DCLogic:bindRails / bindDrag / deck scrub / chips)

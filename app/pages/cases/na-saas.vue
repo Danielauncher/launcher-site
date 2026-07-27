@@ -74,7 +74,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '從零流量到全美前 4 — Launcher' })
+useLauncherSeo({
+  title: '從零流量到全美前 4 — Launcher',
+  description: '從零流量做到全美搜尋排名前 4，12 個月自然曝光 179 萬。看 Launcher 團隊怎麼打北美市場。',
+  path: '/cases/na-saas'
+})
 useLauncherMotion()
 </script>
 

@@ -35,6 +35,11 @@ jobs:
 
       - name: Build
         run: pnpm exec nuxt build
+        env:
+          NUXT_PUBLIC_SITE_URL: ${{ vars.NUXT_PUBLIC_SITE_URL }}
+          NUXT_PUBLIC_GA4_ID: ${{ vars.NUXT_PUBLIC_GA4_ID }}
+          NUXT_PUBLIC_META_PIXEL_ID: ${{ vars.NUXT_PUBLIC_META_PIXEL_ID }}
+          META_CAPI_TOKEN: ${{ secrets.META_CAPI_TOKEN }}
 
       - name: Ensure D1 database exists
         run: pnpm exec wrangler d1 create "$DB_NAME" || echo "D1 already exists"

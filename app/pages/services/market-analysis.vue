@@ -89,7 +89,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '市場分析與定位 — Launcher' })
+useLauncherSeo({
+  title: '市場分析與定位 — Launcher',
+  description: '進場之前，先看清你要打的市場。14 天交付北美市場分析與定位：市場規模、競爭格局、進入路徑與定價驗證。',
+  path: '/services/market-analysis'
+})
 useLauncherMotion()
 </script>
 

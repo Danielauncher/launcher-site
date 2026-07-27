@@ -89,7 +89,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '為什麼你的英文官網，當地人一眼就覺得「怪」? — Launcher' })
+useLauncherSeo({
+  title: '為什麼你的英文官網，當地人一眼就覺得「怪」? — Launcher',
+  description: '為什麼你的英文官網，當地人一眼就覺得「怪」？拆解亞洲品牌出海最常見的在地化盲點與修法。',
+  path: '/insights/foreign-feel'
+})
 useLauncherMotion()
 
 // TOC scroll-spy(移植自 DCLogic componentDidMount)

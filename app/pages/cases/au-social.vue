@@ -73,7 +73,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '澳洲社群：90 天做到單月 180 萬觸及 — Launcher' })
+useLauncherSeo({
+  title: '澳洲社群：90 天做到單月 180 萬觸及 — Launcher',
+  description: '90 天把單月自然觸及做到 180 萬、粉絲年成長 +94%。澳洲消費品牌社群操盤實錄。',
+  path: '/cases/au-social'
+})
 useLauncherMotion()
 </script>
 

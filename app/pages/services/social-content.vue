@@ -89,7 +89,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: '社群與內容經營 — Launcher' })
+useLauncherSeo({
+  title: '社群與內容經營 — Launcher',
+  description: '持續累積的品牌聲量。澳洲在地社群操盤手經營你的英文社群與內容，把品牌做成當地人願意追蹤的樣子。',
+  path: '/services/social-content'
+})
 useLauncherMotion()
 </script>
 
