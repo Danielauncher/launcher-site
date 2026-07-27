@@ -13,7 +13,7 @@ env:
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
   CLOUDFLARE_ACCOUNT_ID: 032dd26b5e85b79bd5e2ff6d98f565d0
   DB_NAME: launcher-db
-  PROJECT_NAME: launcher-site
+  PROJECT_NAME: withlauncher
 
 jobs:
   deploy:
