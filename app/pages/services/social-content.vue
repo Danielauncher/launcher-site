@@ -29,6 +29,13 @@
       </div>
     </section>
 
+    <MediaShowcase
+      :items="showcase"
+      eyebrow="作品選 Selected Work"
+      heading="我們做的內容，長<em class='sw zh' style='font-family:&quot;Noto Serif TC&quot;,serif;font-style:normal;font-weight:600;font-size:0.975em'>這個樣子</em>。"
+      note="作品片段由澳洲操盤手提供、經授權使用。"
+    />
+
     <!-- 價值敘事 1 -->
     <section style="padding:calc(var(--u)*8) 0">
       <div class="g2" style="max-width:1470px;margin:0 auto;padding:0 5vw;display:grid;grid-template-columns:1fr 1.1fr;gap:calc(var(--u)*7);align-items:center">
@@ -95,6 +102,9 @@ useLauncherSeo({
   path: '/services/social-content'
 })
 useLauncherMotion()
+
+// 澳洲夥伴授權素材(Owen 交付後填入,空陣列時區塊自動隱藏)
+const showcase: { type: 'video' | 'image'; src: string; poster?: string; caption?: string }[] = []
 </script>
 
 <style>

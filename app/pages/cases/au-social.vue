@@ -39,6 +39,13 @@
       </div>
     </section>
 
+    <MediaShowcase
+      :items="showcase"
+      eyebrow="作品選 Selected Work"
+      heading="百聞不如<em class='sw zh' style='font-family:&quot;Noto Serif TC&quot;,serif;font-style:normal;font-weight:600;font-size:0.975em'>一看</em>。"
+      note="作品片段由澳洲操盤手提供、經授權使用。"
+    />
+
     <!-- 可數的事實 -->
     <section style="padding:calc(var(--u)*8) 0">
       <div style="max-width:1078px;margin:0 auto;padding:0 5vw">
@@ -79,6 +86,10 @@ useLauncherSeo({
   path: '/cases/au-social'
 })
 useLauncherMotion()
+
+// 澳洲夥伴授權素材(Owen 交付後填入,空陣列時區塊自動隱藏)
+// 影片放 public/media/ 或雲端網址;poster 為 16:9 縮圖
+const showcase: { type: 'video' | 'image'; src: string; poster?: string; caption?: string }[] = []
 </script>
 
 <style>
