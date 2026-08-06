@@ -13,6 +13,11 @@ export default defineNuxtConfig({
       metaPixelId: process.env.NUXT_PUBLIC_META_PIXEL_ID || ''
     }
   },
+  routeRules: {
+    '/cases/na-saas': { redirect: { to: '/cases/medical-aesthetics', statusCode: 301 } },
+    '/cases/au-social': { redirect: { to: '/cases/tobi-pearce', statusCode: 301 } },
+    '/cases/ny-dtc': { redirect: { to: '/cases/level-up-tv', statusCode: 301 } }
+  },
   css: ['~/assets/css/main.css'],
   app: {
     head: {
