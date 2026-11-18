@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     // Meta Conversions API token(建置時由 CI secret 注入;未設定則不送 CAPI)
     metaCapiToken: process.env.META_CAPI_TOKEN || '',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://withlauncher.pages.dev',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://launcher.tw',
       ga4Id: process.env.NUXT_PUBLIC_GA4_ID || '',
       metaPixelId: process.env.NUXT_PUBLIC_META_PIXEL_ID || ''
     }
